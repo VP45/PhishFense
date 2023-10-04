@@ -11,7 +11,7 @@ import {
     BsPersonFillGear,
 } from "react-icons/bs";
 
-export default function Home() {
+export default function Whois() {
     const [domain, setDomain] = useState("");
     const [domainData, setDomainData] = useState<any>({
         domain_name: ["GOOGLE.COM", "google.com"],
@@ -76,10 +76,42 @@ export default function Home() {
     };
     return (
         <section className="relative">
+            {/* illustartion */}
+            <div
+                // left-1/2 transform -translate-x-1/2 bottom-0
+                className="absolute left-1/2 transform -translate-x-1/2 pointer-events-none -z-1"
+                aria-hidden="true"
+            >
+                <svg
+                    width="1360"
+                    height="578"
+                    viewBox="0 0 1360 578"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <defs>
+                        <linearGradient
+                            x1="50%"
+                            y1="0%"
+                            x2="50%"
+                            y2="100%"
+                            id="illustration-01"
+                        >
+                            <stop stopColor="#FFF" offset="0%" />
+                            <stop stopColor="#EAEAEA" offset="77.402%" />
+                            <stop stopColor="#DFDFDF" offset="100%" />
+                        </linearGradient>
+                    </defs>
+                    <g fill="url(#illustration-01)" fillRule="evenodd">
+                        <circle cx="1232" cy="128" r="128" />
+                        <circle cx="155" cy="443" r="64" />
+                    </g>
+                </svg>
+            </div>
+
             <div className="max-w-6xl mx-auto px-4 sm:px-6">
-                <div className="pt-32 pb-12 md:pt-40 md:pb-20">
+                <div className="pt-20 pb-12 md:pt-40 md:pb-20 flex flex-col justify-center items-center">
                     <h1
-                        className="text-5xl md:text-6xl font-extrabold leading-tighter tracking-tighter mb-4"
+                        className="text-4xl md:text-5xl font-extrabold leading-tighter tracking-tighter mb-4 text-center"
                         data-aos="zoom-y-out"
                     >
                         <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
@@ -113,7 +145,7 @@ export default function Home() {
 
                 {/* {domainData && (
                     <div className="max-w-6xl mx-auto px-4 sm:px-6">
-                        <div className="relative flex flex-row justify-start items-center px-4 gap-6 bg-white rounded shadow-md">
+                        <div className="relative flex flex-row justify-start items-center px-4 gap-6 bg-white rounded shadow-md pb-2 mb-4">
                             <TbWorldWww className="w-14 h-14 p-2 bg-blue-600 rounded-full text-white " />
                             <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
                                 Domain Information
@@ -162,7 +194,7 @@ export default function Home() {
                             )}
                         </ul>
 
-                        <div className="relative flex flex-row justify-start items-center px-4 gap-6 bg-white rounded shadow-md">
+                        <div className="relative flex flex-row justify-start items-center px-4 gap-6 bg-white rounded shadow-md pb-2 mb-4">
                             <BsFillPersonFill className="w-14 h-14 p-2 bg-blue-600 rounded-full text-white " />
                             <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
                                 Registrant Contact
@@ -198,7 +230,7 @@ export default function Home() {
                             )}
                         </ul>
 
-                        <div className="relative flex flex-row justify-start items-center px-4 gap-6 bg-white rounded shadow-md">
+                        <div className="relative flex flex-row justify-start items-center px-4 gap-6 bg-white rounded shadow-md pb-2 mb-4">
                             <BsPersonLinesFill className="w-14 h-14 p-2 bg-blue-600 rounded-full text-white " />
                             <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
                                 Administrative Contact
@@ -237,7 +269,7 @@ export default function Home() {
                             )}
                         </ul>
 
-                        <div className="relative flex flex-row justify-start items-center px-4 gap-6 bg-white rounded shadow-md">
+                        <div className="relative flex flex-row justify-start items-center px-4 gap-6 bg-white rounded shadow-md pb-2 mb-4">
                             <BsPersonFillGear className="w-14 h-14 p-2 bg-blue-600 rounded-full text-white " />
                             <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
                                 Technical Contact
@@ -275,208 +307,246 @@ export default function Home() {
                     </div>
                 )} */}
                 {domainData && (
-                    <div className="max-w-6xl mx-auto px-4 sm:px-6">
+                    <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col gap-6">
                         {/* Domain Information */}
-                        <div className="relative flex flex-row justify-start items-center px-4 gap-6 bg-white rounded shadow-md">
-                            <TbWorldWww className="w-14 h-14 p-2 bg-blue-600 rounded-full text-white" />
-                            <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
-                                Domain Information
-                            </h4>
-                        </div>
-                        <ul>
-                            {domainData.domain_name &&
-                                domainData.domain_name.map((name, index) => (
-                                    <li key={index}>
-                                        <strong>Domain:</strong> {name}
+                        <div>
+                            <div className="relative flex flex-row justify-start items-center px-4 gap-6 bg-white rounded shadow-md pb-2 mb-4">
+                                <TbWorldWww className="w-14 h-14 p-2 bg-blue-600 rounded-full text-white" />
+                                <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
+                                    Domain Information
+                                </h4>
+                            </div>
+                            <ul>
+                                {domainData.domain_name &&
+                                    domainData.domain_name.map(
+                                        (name: string, index: number) => (
+                                            <li className="" key={index}>
+                                                <strong>Domain:</strong> {name}
+                                            </li>
+                                        )
+                                    )}
+                                {domainData.registrar && (
+                                    <li>
+                                        <strong>Registrar:</strong>{" "}
+                                        {domainData.registrar}
                                     </li>
-                                ))}
-                            {domainData.registrar && (
-                                <li>
-                                    <strong>Registrar:</strong>{" "}
-                                    {domainData.registrar}
-                                </li>
-                            )}
-                            {domainData.creation_date &&
-                                domainData.creation_date.map((date, index) => (
-                                    <li key={index}>
-                                        <strong>Creation Date:</strong> {date}
-                                    </li>
-                                ))}
-                            {domainData.expiration_date &&
-                                domainData.expiration_date.map(
-                                    (date, index) => (
-                                        <li key={index}>
-                                            <strong>Expiration Date:</strong>{" "}
-                                            {date}
-                                        </li>
-                                    )
                                 )}
-                            {domainData.updated_date &&
-                                domainData.updated_date.map((date, index) => (
-                                    <li key={index}>
-                                        <strong>Updated Date:</strong> {date}
-                                    </li>
-                                ))}
-                            {domainData.status &&
-                                domainData.status.map((status, index) => (
-                                    <li key={index}>
-                                        <strong>Status:</strong> {status}
-                                    </li>
-                                ))}
-                            {domainData.name_servers &&
-                                domainData.name_servers.map((server, index) => (
-                                    <li key={index}>
-                                        <strong>
-                                            Name Server {index + 1}:
-                                        </strong>{" "}
-                                        {server}
-                                    </li>
-                                ))}
-                        </ul>
+                                {domainData.creation_date &&
+                                    domainData.creation_date.map(
+                                        (date: string, index: number) => (
+                                            <li key={index}>
+                                                <strong>Creation Date:</strong>{" "}
+                                                {date}
+                                            </li>
+                                        )
+                                    )}
+                                {domainData.expiration_date &&
+                                    domainData.expiration_date.map(
+                                        (date: any, index: number) => (
+                                            <li key={index}>
+                                                <strong>
+                                                    Expiration Date:
+                                                </strong>{" "}
+                                                {date}
+                                            </li>
+                                        )
+                                    )}
+                                {domainData.updated_date &&
+                                    domainData.updated_date.map(
+                                        (date: any, index: number) => (
+                                            <li key={index}>
+                                                <strong>Updated Date:</strong>{" "}
+                                                {date}
+                                            </li>
+                                        )
+                                    )}
+                                {domainData.status &&
+                                    domainData.status.map(
+                                        (status: string, index: number) => (
+                                            <li key={index}>
+                                                <strong>Status:</strong>{" "}
+                                                {status}
+                                            </li>
+                                        )
+                                    )}
+                                {domainData.name_servers &&
+                                    domainData.name_servers.map(
+                                        (server: string, index: number) => (
+                                            <li key={index}>
+                                                <strong>
+                                                    Name Server {index + 1}:
+                                                </strong>{" "}
+                                                {server}
+                                            </li>
+                                        )
+                                    )}
+                            </ul>
+                        </div>
 
                         {/* Registrant Contact */}
-                        <div className="relative flex flex-row justify-start items-center px-4 gap-6 bg-white rounded shadow-md">
-                            <BsFillPersonFill className="w-14 h-14 p-2 bg-blue-600 rounded-full text-white" />
-                            <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
-                                Registrant Contact
-                            </h4>
-                        </div>
-                        <ul>
-                            {domainData.org && (
-                                <li>
-                                    <strong>Organization:</strong>{" "}
-                                    {domainData.org}
-                                </li>
-                            )}
-                            {domainData.state && (
-                                <li>
-                                    <strong>State:</strong> {domainData.state}
-                                </li>
-                            )}
-                            {domainData.country && (
-                                <li>
-                                    <strong>Country:</strong>{" "}
-                                    {domainData.country}
-                                </li>
-                            )}
-                            {domainData.emails &&
-                                domainData.emails.map((email, index) => (
-                                    <li key={index}>
-                                        <strong>Email {index + 1}:</strong>{" "}
-                                        {email}
+                        <div>
+                            <div className="relative flex flex-row justify-start items-center px-4 gap-6 bg-white rounded shadow-md pb-2 mb-4">
+                                <BsFillPersonFill className="w-14 h-14 p-2 bg-blue-600 rounded-full text-white" />
+                                <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
+                                    Registrant Contact
+                                </h4>
+                            </div>
+                            <ul>
+                                {domainData.org && (
+                                    <li>
+                                        <strong>Organization:</strong>{" "}
+                                        {domainData.org}
                                     </li>
-                                ))}
-                        </ul>
+                                )}
+                                {domainData.state && (
+                                    <li>
+                                        <strong>State:</strong>{" "}
+                                        {domainData.state}
+                                    </li>
+                                )}
+                                {domainData.country && (
+                                    <li>
+                                        <strong>Country:</strong>{" "}
+                                        {domainData.country}
+                                    </li>
+                                )}
+                                {domainData.emails &&
+                                    domainData.emails.map(
+                                        (email: string, index: number) => (
+                                            <li key={index}>
+                                                <strong>
+                                                    Email {index + 1}:
+                                                </strong>{" "}
+                                                {email}
+                                            </li>
+                                        )
+                                    )}
+                            </ul>
+                        </div>
 
                         {/* Administrative Contact */}
-                        <div className="relative flex flex-row justify-start items-center px-4 gap-6 bg-white rounded shadow-md">
-                            <BsPersonLinesFill className="w-14 h-14 p-2 bg-blue-600 rounded-full text-white" />
-                            <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
-                                Administrative Contact
-                            </h4>
-                        </div>
-                        <ul>
+                        <div>
                             {domainData["Administrative Contact"] && (
-                                <>
-                                    {domainData["Administrative Contact"]
-                                        .Organization && (
-                                        <li>
-                                            <strong>Organization:</strong>{" "}
-                                            {
-                                                domainData[
-                                                    "Administrative Contact"
-                                                ].Organization
-                                            }
-                                        </li>
-                                    )}
-                                    {domainData["Administrative Contact"]
-                                        .State && (
-                                        <li>
-                                            <strong>State:</strong>{" "}
-                                            {
-                                                domainData[
-                                                    "Administrative Contact"
-                                                ].State
-                                            }
-                                        </li>
-                                    )}
-                                    {domainData["Administrative Contact"]
-                                        .Country && (
-                                        <li>
-                                            <strong>Country:</strong>{" "}
-                                            {
-                                                domainData[
-                                                    "Administrative Contact"
-                                                ].Country
-                                            }
-                                        </li>
-                                    )}
-                                    {domainData["Administrative Contact"]
-                                        .Email && (
-                                        <li>
-                                            <strong>Email:</strong>{" "}
-                                            {
-                                                domainData[
-                                                    "Administrative Contact"
-                                                ].Email
-                                            }
-                                        </li>
-                                    )}
-                                </>
+                                <div className="relative flex flex-row justify-start items-center px-4 gap-6 bg-white rounded shadow-md pb-2 mb-4">
+                                    <BsPersonLinesFill className="w-14 h-14 p-2 bg-blue-600 rounded-full text-white" />
+                                    <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
+                                        Administrative Contact
+                                    </h4>
+                                </div>
                             )}
-                        </ul>
-
-                        {/* Technical Contact */}
-                        <div className="relative flex flex-row justify-start items-center px-4 gap-6 bg-white rounded shadow-md">
-                            <BsPersonFillGear className="w-14 h-14 p-2 bg-blue-600 rounded-full text-white" />
-                            <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
-                                Technical Contact
-                            </h4>
+                            <ul>
+                                {domainData["Administrative Contact"] && (
+                                    <>
+                                        {domainData["Administrative Contact"]
+                                            .Organization && (
+                                            <li>
+                                                <strong>Organization:</strong>{" "}
+                                                {
+                                                    domainData[
+                                                        "Administrative Contact"
+                                                    ].Organization
+                                                }
+                                            </li>
+                                        )}
+                                        {domainData["Administrative Contact"]
+                                            .State && (
+                                            <li>
+                                                <strong>State:</strong>{" "}
+                                                {
+                                                    domainData[
+                                                        "Administrative Contact"
+                                                    ].State
+                                                }
+                                            </li>
+                                        )}
+                                        {domainData["Administrative Contact"]
+                                            .Country && (
+                                            <li>
+                                                <strong>Country:</strong>{" "}
+                                                {
+                                                    domainData[
+                                                        "Administrative Contact"
+                                                    ].Country
+                                                }
+                                            </li>
+                                        )}
+                                        {domainData["Administrative Contact"]
+                                            .Email && (
+                                            <li>
+                                                <strong>Email:</strong>{" "}
+                                                {
+                                                    domainData[
+                                                        "Administrative Contact"
+                                                    ].Email
+                                                }
+                                            </li>
+                                        )}
+                                    </>
+                                )}
+                            </ul>
                         </div>
-                        <ul>
+
+                        <div>
+                            {/* Technical Contact */}
                             {domainData["Technical Contact"] && (
-                                <>
-                                    {domainData["Technical Contact"]
-                                        .Organization && (
-                                        <li>
-                                            <strong>Organization:</strong>{" "}
-                                            {
-                                                domainData["Technical Contact"]
-                                                    .Organization
-                                            }
-                                        </li>
-                                    )}
-                                    {domainData["Technical Contact"].State && (
-                                        <li>
-                                            <strong>State:</strong>{" "}
-                                            {
-                                                domainData["Technical Contact"]
-                                                    .State
-                                            }
-                                        </li>
-                                    )}
-                                    {domainData["Technical Contact"]
-                                        .Country && (
-                                        <li>
-                                            <strong>Country:</strong>{" "}
-                                            {
-                                                domainData["Technical Contact"]
-                                                    .Country
-                                            }
-                                        </li>
-                                    )}
-                                    {domainData["Technical Contact"].Email && (
-                                        <li>
-                                            <strong>Email:</strong>{" "}
-                                            {
-                                                domainData["Technical Contact"]
-                                                    .Email
-                                            }
-                                        </li>
-                                    )}
-                                </>
+                                <div className="relative flex flex-row justify-start items-center px-4 gap-6 bg-white rounded shadow-md pb-2 mb-4">
+                                    <BsPersonFillGear className="w-14 h-14 p-2 bg-blue-600 rounded-full text-white" />
+                                    <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
+                                        Technical Contact
+                                    </h4>
+                                </div>
                             )}
-                        </ul>
+                            <ul>
+                                {domainData["Technical Contact"] && (
+                                    <>
+                                        {domainData["Technical Contact"]
+                                            .Organization && (
+                                            <li>
+                                                <strong>Organization:</strong>{" "}
+                                                {
+                                                    domainData[
+                                                        "Technical Contact"
+                                                    ].Organization
+                                                }
+                                            </li>
+                                        )}
+                                        {domainData["Technical Contact"]
+                                            .State && (
+                                            <li>
+                                                <strong>State:</strong>{" "}
+                                                {
+                                                    domainData[
+                                                        "Technical Contact"
+                                                    ].State
+                                                }
+                                            </li>
+                                        )}
+                                        {domainData["Technical Contact"]
+                                            .Country && (
+                                            <li>
+                                                <strong>Country:</strong>{" "}
+                                                {
+                                                    domainData[
+                                                        "Technical Contact"
+                                                    ].Country
+                                                }
+                                            </li>
+                                        )}
+                                        {domainData["Technical Contact"]
+                                            .Email && (
+                                            <li>
+                                                <strong>Email:</strong>{" "}
+                                                {
+                                                    domainData[
+                                                        "Technical Contact"
+                                                    ].Email
+                                                }
+                                            </li>
+                                        )}
+                                    </>
+                                )}
+                            </ul>
+                        </div>
                     </div>
                 )}
             </div>
