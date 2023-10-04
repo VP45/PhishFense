@@ -13,7 +13,51 @@ import {
 
 export default function Home() {
     const [domain, setDomain] = useState("");
-    const [domainData, setDomainData] = useState<any>({});
+    const [domainData, setDomainData] = useState<any>({
+        domain_name: ["GOOGLE.COM", "google.com"],
+        registrar: "MarkMonitor, Inc.",
+        whois_server: "whois.markmonitor.com",
+        referral_url: null,
+        updated_date: ["2019-09-09T15:39:04", "2019-09-09T15:39:04+00:00"],
+        creation_date: ["1997-09-15T04:00:00", "1997-09-15T07:00:00+00:00"],
+        expiration_date: ["2028-09-14T04:00:00", "2028-09-13T07:00:00+00:00"],
+        name_servers: [
+            "NS1.GOOGLE.COM",
+            "NS2.GOOGLE.COM",
+            "NS3.GOOGLE.COM",
+            "NS4.GOOGLE.COM",
+            "ns3.google.com",
+            "ns2.google.com",
+            "ns4.google.com",
+            "ns1.google.com",
+        ],
+        status: [
+            "clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited",
+            "clientTransferProhibited https://icann.org/epp#clientTransferProhibited",
+            "clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited",
+            "serverDeleteProhibited https://icann.org/epp#serverDeleteProhibited",
+            "serverTransferProhibited https://icann.org/epp#serverTransferProhibited",
+            "serverUpdateProhibited https://icann.org/epp#serverUpdateProhibited",
+            "clientUpdateProhibited (https://www.icann.org/epp#clientUpdateProhibited)",
+            "clientTransferProhibited (https://www.icann.org/epp#clientTransferProhibited)",
+            "clientDeleteProhibited (https://www.icann.org/epp#clientDeleteProhibited)",
+            "serverUpdateProhibited (https://www.icann.org/epp#serverUpdateProhibited)",
+            "serverTransferProhibited (https://www.icann.org/epp#serverTransferProhibited)",
+            "serverDeleteProhibited (https://www.icann.org/epp#serverDeleteProhibited)",
+        ],
+        emails: [
+            "abusecomplaints@markmonitor.com",
+            "whoisrequest@markmonitor.com",
+        ],
+        dnssec: "unsigned",
+        name: null,
+        org: "Google LLC",
+        address: null,
+        city: null,
+        state: "CA",
+        registrant_postal_code: null,
+        country: "US",
+    });
     const [loading, setLoading] = useState(false);
     const fetchWhois = async () => {
         setLoading(true);
@@ -67,7 +111,7 @@ export default function Home() {
 
                 {/* if domainData is not null or {} */}
 
-                {domainData && (
+                {/* {domainData && (
                     <div className="max-w-6xl mx-auto px-4 sm:px-6">
                         <div className="relative flex flex-row justify-start items-center px-4 gap-6 bg-white rounded shadow-md">
                             <TbWorldWww className="w-14 h-14 p-2 bg-blue-600 rounded-full text-white " />
@@ -226,6 +270,211 @@ export default function Home() {
                                     <strong>Email:</strong>{" "}
                                     {domainData["Technical Contact"].Email}
                                 </li>
+                            )}
+                        </ul>
+                    </div>
+                )} */}
+                {domainData && (
+                    <div className="max-w-6xl mx-auto px-4 sm:px-6">
+                        {/* Domain Information */}
+                        <div className="relative flex flex-row justify-start items-center px-4 gap-6 bg-white rounded shadow-md">
+                            <TbWorldWww className="w-14 h-14 p-2 bg-blue-600 rounded-full text-white" />
+                            <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
+                                Domain Information
+                            </h4>
+                        </div>
+                        <ul>
+                            {domainData.domain_name &&
+                                domainData.domain_name.map((name, index) => (
+                                    <li key={index}>
+                                        <strong>Domain:</strong> {name}
+                                    </li>
+                                ))}
+                            {domainData.registrar && (
+                                <li>
+                                    <strong>Registrar:</strong>{" "}
+                                    {domainData.registrar}
+                                </li>
+                            )}
+                            {domainData.creation_date &&
+                                domainData.creation_date.map((date, index) => (
+                                    <li key={index}>
+                                        <strong>Creation Date:</strong> {date}
+                                    </li>
+                                ))}
+                            {domainData.expiration_date &&
+                                domainData.expiration_date.map(
+                                    (date, index) => (
+                                        <li key={index}>
+                                            <strong>Expiration Date:</strong>{" "}
+                                            {date}
+                                        </li>
+                                    )
+                                )}
+                            {domainData.updated_date &&
+                                domainData.updated_date.map((date, index) => (
+                                    <li key={index}>
+                                        <strong>Updated Date:</strong> {date}
+                                    </li>
+                                ))}
+                            {domainData.status &&
+                                domainData.status.map((status, index) => (
+                                    <li key={index}>
+                                        <strong>Status:</strong> {status}
+                                    </li>
+                                ))}
+                            {domainData.name_servers &&
+                                domainData.name_servers.map((server, index) => (
+                                    <li key={index}>
+                                        <strong>
+                                            Name Server {index + 1}:
+                                        </strong>{" "}
+                                        {server}
+                                    </li>
+                                ))}
+                        </ul>
+
+                        {/* Registrant Contact */}
+                        <div className="relative flex flex-row justify-start items-center px-4 gap-6 bg-white rounded shadow-md">
+                            <BsFillPersonFill className="w-14 h-14 p-2 bg-blue-600 rounded-full text-white" />
+                            <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
+                                Registrant Contact
+                            </h4>
+                        </div>
+                        <ul>
+                            {domainData.org && (
+                                <li>
+                                    <strong>Organization:</strong>{" "}
+                                    {domainData.org}
+                                </li>
+                            )}
+                            {domainData.state && (
+                                <li>
+                                    <strong>State:</strong> {domainData.state}
+                                </li>
+                            )}
+                            {domainData.country && (
+                                <li>
+                                    <strong>Country:</strong>{" "}
+                                    {domainData.country}
+                                </li>
+                            )}
+                            {domainData.emails &&
+                                domainData.emails.map((email, index) => (
+                                    <li key={index}>
+                                        <strong>Email {index + 1}:</strong>{" "}
+                                        {email}
+                                    </li>
+                                ))}
+                        </ul>
+
+                        {/* Administrative Contact */}
+                        <div className="relative flex flex-row justify-start items-center px-4 gap-6 bg-white rounded shadow-md">
+                            <BsPersonLinesFill className="w-14 h-14 p-2 bg-blue-600 rounded-full text-white" />
+                            <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
+                                Administrative Contact
+                            </h4>
+                        </div>
+                        <ul>
+                            {domainData["Administrative Contact"] && (
+                                <>
+                                    {domainData["Administrative Contact"]
+                                        .Organization && (
+                                        <li>
+                                            <strong>Organization:</strong>{" "}
+                                            {
+                                                domainData[
+                                                    "Administrative Contact"
+                                                ].Organization
+                                            }
+                                        </li>
+                                    )}
+                                    {domainData["Administrative Contact"]
+                                        .State && (
+                                        <li>
+                                            <strong>State:</strong>{" "}
+                                            {
+                                                domainData[
+                                                    "Administrative Contact"
+                                                ].State
+                                            }
+                                        </li>
+                                    )}
+                                    {domainData["Administrative Contact"]
+                                        .Country && (
+                                        <li>
+                                            <strong>Country:</strong>{" "}
+                                            {
+                                                domainData[
+                                                    "Administrative Contact"
+                                                ].Country
+                                            }
+                                        </li>
+                                    )}
+                                    {domainData["Administrative Contact"]
+                                        .Email && (
+                                        <li>
+                                            <strong>Email:</strong>{" "}
+                                            {
+                                                domainData[
+                                                    "Administrative Contact"
+                                                ].Email
+                                            }
+                                        </li>
+                                    )}
+                                </>
+                            )}
+                        </ul>
+
+                        {/* Technical Contact */}
+                        <div className="relative flex flex-row justify-start items-center px-4 gap-6 bg-white rounded shadow-md">
+                            <BsPersonFillGear className="w-14 h-14 p-2 bg-blue-600 rounded-full text-white" />
+                            <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
+                                Technical Contact
+                            </h4>
+                        </div>
+                        <ul>
+                            {domainData["Technical Contact"] && (
+                                <>
+                                    {domainData["Technical Contact"]
+                                        .Organization && (
+                                        <li>
+                                            <strong>Organization:</strong>{" "}
+                                            {
+                                                domainData["Technical Contact"]
+                                                    .Organization
+                                            }
+                                        </li>
+                                    )}
+                                    {domainData["Technical Contact"].State && (
+                                        <li>
+                                            <strong>State:</strong>{" "}
+                                            {
+                                                domainData["Technical Contact"]
+                                                    .State
+                                            }
+                                        </li>
+                                    )}
+                                    {domainData["Technical Contact"]
+                                        .Country && (
+                                        <li>
+                                            <strong>Country:</strong>{" "}
+                                            {
+                                                domainData["Technical Contact"]
+                                                    .Country
+                                            }
+                                        </li>
+                                    )}
+                                    {domainData["Technical Contact"].Email && (
+                                        <li>
+                                            <strong>Email:</strong>{" "}
+                                            {
+                                                domainData["Technical Contact"]
+                                                    .Email
+                                            }
+                                        </li>
+                                    )}
+                                </>
                             )}
                         </ul>
                     </div>
