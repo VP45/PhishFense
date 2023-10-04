@@ -3,7 +3,12 @@
 import Image from "next/image";
 import { useState } from "react";
 
-export const Slider = ({ image, ogImage }) => {
+type Props = {
+    image: string;
+    ogImage: string;
+};
+
+export const Slider = ({ image, ogImage }: Props) => {
     const [sliderPosition, setSliderPosition] = useState(50);
     const [isDragging, setIsDragging] = useState(false);
 
