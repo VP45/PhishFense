@@ -15,27 +15,3 @@
         direction: rtl;
     }
 }
-
-/* Add custom styles for the iframe container */
-.relative2 {
-    perspective: 1000px;
-}
-
-iframe {
-    transform: translateY(0);
-    transition: transform 1s;
-}
-
-/* Add styles for scrolling animation */
-iframe.scrolling {
-    animation: scrollAnimation 5s linear infinite;
-}
-
-@keyframes scrollAnimation {
-    from {
-        transform: translateY(0);
-    }
-    to {
-        transform: translateY(-100%);
-    }
-}
