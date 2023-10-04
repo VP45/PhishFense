@@ -9,30 +9,48 @@ const ComparePage = () => {
 
     const [loading, setLoading] = useState(false);
 
-    const [image1, setImage1] = useState("https://picsum.photos/200/300");
-    const [image2, setImage2] = useState("https://picsum.photos/200/300");
+    const [image1, setImage1] = useState("");
+    const [image2, setImage2] = useState("");
+    const [image3, setImage3] = useState("");
+    const [image4, setImage4] = useState("");
 
     const [score, setScore] = useState(10);
 
-    const compareDomains = () => {
+    const compareDomains = (e) => {
+        e.preventDefault();
         // make to api calls first api call returns two images that are two be displayed here, second api call returns a similarity score fo the two domains in each api call i have to pass the domain names as body parameter
 
         // api call 1
         setLoading(true);
-        fetch("http://localhost:5000/api/compare", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                domain1: domain1,
-                domain2: domain2,
-            }),
-        })
+        fetch(
+            `https://8550-103-246-224-137.ngrok-free.app/post_images?url1=${encodeURIComponent(
+                domain1
+            )}&url2=${encodeURIComponent(domain2)}`,
+            // "https://8550-103-246-224-137.ngrok-free.app/post_images?url1=https%3A%2F%2Fgithub.com%2FMokshitSurana&url2=https%3A%2F%2Fgithub.com%2FArchit1706",
+            {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                // body: JSON.stringify({
+                //     domain1: domain1,
+                //     domain2: domain2,
+                // }),
+            }
+        )
             .then((res) => res.json())
             .then((data) => {
-                setImage1(data.image1);
-                setImage2(data.image2);
+                console.log(data);
+                return data;
+            })
+            .then((data) => {
+                console.log(data);
+                setImage1(data?.image1);
+                console.log(image1);
+                setImage2(data?.image2);
+                setImage3(data?.image3);
+                setImage4(data?.image4);
+                setScore(data?.ssim_score);
                 setLoading(false);
             })
             .catch((err) => {
@@ -42,27 +60,27 @@ const ComparePage = () => {
 
         // api call 2
 
-        fetch("http://localhost:5000/api/score", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                domain1: domain1,
-                domain2: domain2,
-            }),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setScore(data.score);
-                setLoading(false);
-            })
-            .catch((err) => {
-                console.log(err);
-                setLoading(false);
-            });
+        // fetch("http://localhost:5000/api/score", {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify({
+        //         domain1: domain1,
+        //         domain2: domain2,
+        //     }),
+        // })
+        //     .then((res) => res.json())
+        //     .then((data) => {
+        //         setScore(data.score);
+        //         setLoading(false);
+        //     })
+        //     .catch((err) => {
+        //         console.log(err);
+        //         setLoading(false);
+        //     });
 
-        setLoading(false);
+        // setLoading(false);
     };
     return (
         <section className="relative">
@@ -145,14 +163,14 @@ const ComparePage = () => {
                         <>
                             <div className="flex flex-col justify-center items-center gap-4 pt-12">
                                 <div className="flex flex-row justify-center items-center gap-4">
-                                    {/* <img
-                                        // src={`data:image/png;base64,${image1}`}
-                                        src={image1}
-                                        alt="domain1"
-                                        className="w-1/2"
-                                    /> */}
-                                    <Slider image={image1} ogImage={image2} />
-                                    <Slider image={image1} ogImage={image2} />
+                                    <Slider
+                                        image={`data:image/png;base64,${image1}`}
+                                        ogImage={`data:image/png;base64,${image3}`}
+                                    />
+                                    <Slider
+                                        image={`data:image/png;base64,${image2}`}
+                                        ogImage={`data:image/png;base64,${image4}`}
+                                    />
                                 </div>
                             </div>
                             <p className="text-2xl text-gray-600 pt-6">

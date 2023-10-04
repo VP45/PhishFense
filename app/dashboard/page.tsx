@@ -14,19 +14,26 @@ export default function Dashboard() {
     const [loader, setLoader] = useState(false);
     const { loading, pages, totalPages, currentPage, setCurrentPage } =
         useDataFetcher();
-    const fetchPhishing = async () => {
+    const fetchPhishing = async (e) => {
+        e.preventDefault();
         setLoader(true);
-        const response = await fetch(`/api/whois`, {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                domain: domain,
-            }),
-        });
+        const response = await fetch(
+            `https://8550-103-246-224-137.ngrok-free.app/predict`,
+            {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    url: domain,
+                }),
+            }
+        );
         const data = await response.json();
+        console.log(data);
         setPhishingData(data);
+        console.log(phishingData);
+        console.log(phishingData?.prediction?.SCORE);
         setLoader(false);
     };
 
@@ -106,7 +113,7 @@ export default function Dashboard() {
                             <span className="bg-gray-200 border-4 border-blue-400 p-8 text-3xl font-bold rounded-full">
                                 <CountUp
                                     start={0}
-                                    end={phishingData.SCORE || 180}
+                                    end={phishingData?.prediction?.SCORE}
                                     duration={2}
                                     decimals={0}
                                     suffix={""}
@@ -124,7 +131,7 @@ export default function Dashboard() {
                                     In Top 1 Million :
                                 </span>
                                 <p className="ml-auto">
-                                    {phishingData?.InTop1Million ? (
+                                    {phishingData?.prediction?.InTop1Million ? (
                                         <GoCheckCircleFill
                                             className="text-green-500"
                                             size={24}
@@ -142,7 +149,8 @@ export default function Dashboard() {
                                     In URL Void BlackList :
                                 </span>
                                 <p className="ml-auto">
-                                    {phishingData?.InURLVoidBlackList ? (
+                                    {phishingData?.prediction
+                                        ?.InURLVoidBlackList ? (
                                         <GoCheckCircleFill
                                             className="text-green-500"
                                             size={24}
@@ -160,7 +168,8 @@ export default function Dashboard() {
                                     SSL Certificate :
                                 </span>
                                 <p className="ml-auto">
-                                    {phishingData?.hasSSLCertificate ? (
+                                    {phishingData?.prediction
+                                        ?.hasSSLCertificate ? (
                                         <GoCheckCircleFill
                                             className="text-green-500"
                                             size={24}
@@ -178,7 +187,7 @@ export default function Dashboard() {
                                     HTTPS :
                                 </span>
                                 <p className="ml-auto">
-                                    {phishingData?.isHTTPS ? (
+                                    {phishingData?.prediction?.isHTTPS ? (
                                         <GoCheckCircleFill
                                             className="text-green-500"
                                             size={24}
@@ -196,7 +205,8 @@ export default function Dashboard() {
                                     Google Safety Passed :
                                 </span>
                                 <p className="ml-auto">
-                                    {phishingData?.GoogleSafePassed ? (
+                                    {phishingData?.prediction
+                                        ?.GoogleSafePassed ? (
                                         <GoCheckCircleFill
                                             className="text-green-500"
                                             size={24}
@@ -214,7 +224,8 @@ export default function Dashboard() {
                                     Nortan Web Safe Passed :
                                 </span>
                                 <p className="ml-auto">
-                                    {phishingData?.NortanWebSafePassed ? (
+                                    {phishingData?.prediction
+                                        ?.NortanWebSafePassed ? (
                                         <GoCheckCircleFill
                                             className="text-green-500"
                                             size={24}
@@ -232,7 +243,8 @@ export default function Dashboard() {
                                     In Mcaffe BlackList :
                                 </span>
                                 <p className="ml-auto">
-                                    {phishingData?.InMcaffeBlackList ? (
+                                    {phishingData?.prediction
+                                        ?.InMcaffeBlackList ? (
                                         <GoCheckCircleFill
                                             className="text-green-500"
                                             size={24}
@@ -250,7 +262,8 @@ export default function Dashboard() {
                                     In Sucuri Blacklist :
                                 </span>
                                 <p className="ml-auto">
-                                    {phishingData?.InSucuriBlacklist ? (
+                                    {phishingData?.prediction
+                                        ?.InSucuriBlacklist ? (
                                         <GoCheckCircleFill
                                             className="text-green-500"
                                             size={24}
@@ -268,7 +281,8 @@ export default function Dashboard() {
                                     Temporary Domain :
                                 </span>
                                 <p className="ml-auto">
-                                    {phishingData?.isTemporaryDomain ? (
+                                    {phishingData?.prediction
+                                        ?.isTemporaryDomain ? (
                                         <GoCheckCircleFill
                                             className="text-green-500"
                                             size={24}
@@ -286,7 +300,8 @@ export default function Dashboard() {
                                     Older Than 3 Months :
                                 </span>
                                 <p className="ml-auto">
-                                    {phishingData?.isOlderThan3Months ? (
+                                    {phishingData?.prediction
+                                        ?.isOlderThan3Months ? (
                                         <GoCheckCircleFill
                                             className="text-green-500"
                                             size={24}
@@ -304,7 +319,8 @@ export default function Dashboard() {
                                     BlackListed in IpSets :
                                 </span>
                                 <p className="ml-auto">
-                                    {phishingData?.isBlackListedinIpSets ? (
+                                    {phishingData?.prediction
+                                        ?.isBlackListedinIpSets ? (
                                         <GoCheckCircleFill
                                             className="text-green-500"
                                             size={24}
@@ -321,11 +337,13 @@ export default function Dashboard() {
                                 <span className="text-lg text-gray-700 font-bold">
                                     Target URLs :
                                 </span>
-                                {phishingData?.target_urls?.map((u: string) => {
-                                    return <p>{u}</p>;
-                                })}
+                                {phishingData?.prediction?.target_urls?.map(
+                                    (u: string) => {
+                                        return <p>{u}</p>;
+                                    }
+                                )}
                                 <p className="ml-auto">
-                                    {phishingData.target_urls ? (
+                                    {phishingData?.prediction?.target_urls ? (
                                         <GoCheckCircleFill
                                             className="text-green-500"
                                             size={24}

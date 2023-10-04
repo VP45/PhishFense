@@ -9,63 +9,68 @@ import {
 
 export default function Whois() {
     const [domain, setDomain] = useState("");
-    const [domainData, setDomainData] = useState<any>({
-        domain_name: ["GOOGLE.COM", "google.com"],
-        registrar: "MarkMonitor, Inc.",
-        whois_server: "whois.markmonitor.com",
-        referral_url: null,
-        updated_date: ["2019-09-09T15:39:04", "2019-09-09T15:39:04+00:00"],
-        creation_date: ["1997-09-15T04:00:00", "1997-09-15T07:00:00+00:00"],
-        expiration_date: ["2028-09-14T04:00:00", "2028-09-13T07:00:00+00:00"],
-        name_servers: [
-            "NS1.GOOGLE.COM",
-            "NS2.GOOGLE.COM",
-            "NS3.GOOGLE.COM",
-            "NS4.GOOGLE.COM",
-            "ns3.google.com",
-            "ns2.google.com",
-            "ns4.google.com",
-            "ns1.google.com",
-        ],
-        status: [
-            "clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited",
-            "clientTransferProhibited https://icann.org/epp#clientTransferProhibited",
-            "clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited",
-            "serverDeleteProhibited https://icann.org/epp#serverDeleteProhibited",
-            "serverTransferProhibited https://icann.org/epp#serverTransferProhibited",
-            "serverUpdateProhibited https://icann.org/epp#serverUpdateProhibited",
-            "clientUpdateProhibited (https://www.icann.org/epp#clientUpdateProhibited)",
-            "clientTransferProhibited (https://www.icann.org/epp#clientTransferProhibited)",
-            "clientDeleteProhibited (https://www.icann.org/epp#clientDeleteProhibited)",
-            "serverUpdateProhibited (https://www.icann.org/epp#serverUpdateProhibited)",
-            "serverTransferProhibited (https://www.icann.org/epp#serverTransferProhibited)",
-            "serverDeleteProhibited (https://www.icann.org/epp#serverDeleteProhibited)",
-        ],
-        emails: [
-            "abusecomplaints@markmonitor.com",
-            "whoisrequest@markmonitor.com",
-        ],
-        dnssec: "unsigned",
-        name: null,
-        org: "Google LLC",
-        address: null,
-        city: null,
-        state: "CA",
-        registrant_postal_code: null,
-        country: "US",
-    });
+    // const [domainData, setDomainData] = useState<any>({
+    //     domain_name: ["GOOGLE.COM", "google.com"],
+    //     registrar: "MarkMonitor, Inc.",
+    //     whois_server: "whois.markmonitor.com",
+    //     referral_url: null,
+    //     updated_date: ["2019-09-09T15:39:04", "2019-09-09T15:39:04+00:00"],
+    //     creation_date: ["1997-09-15T04:00:00", "1997-09-15T07:00:00+00:00"],
+    //     expiration_date: ["2028-09-14T04:00:00", "2028-09-13T07:00:00+00:00"],
+    //     name_servers: [
+    //         "NS1.GOOGLE.COM",
+    //         "NS2.GOOGLE.COM",
+    //         "NS3.GOOGLE.COM",
+    //         "NS4.GOOGLE.COM",
+    //         "ns3.google.com",
+    //         "ns2.google.com",
+    //         "ns4.google.com",
+    //         "ns1.google.com",
+    //     ],
+    //     status: [
+    //         "clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited",
+    //         "clientTransferProhibited https://icann.org/epp#clientTransferProhibited",
+    //         "clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited",
+    //         "serverDeleteProhibited https://icann.org/epp#serverDeleteProhibited",
+    //         "serverTransferProhibited https://icann.org/epp#serverTransferProhibited",
+    //         "serverUpdateProhibited https://icann.org/epp#serverUpdateProhibited",
+    //         "clientUpdateProhibited (https://www.icann.org/epp#clientUpdateProhibited)",
+    //         "clientTransferProhibited (https://www.icann.org/epp#clientTransferProhibited)",
+    //         "clientDeleteProhibited (https://www.icann.org/epp#clientDeleteProhibited)",
+    //         "serverUpdateProhibited (https://www.icann.org/epp#serverUpdateProhibited)",
+    //         "serverTransferProhibited (https://www.icann.org/epp#serverTransferProhibited)",
+    //         "serverDeleteProhibited (https://www.icann.org/epp#serverDeleteProhibited)",
+    //     ],
+    //     emails: [
+    //         "abusecomplaints@markmonitor.com",
+    //         "whoisrequest@markmonitor.com",
+    //     ],
+    //     dnssec: "unsigned",
+    //     name: null,
+    //     org: "Google LLC",
+    //     address: null,
+    //     city: null,
+    //     state: "CA",
+    //     registrant_postal_code: null,
+    //     country: "US",
+    // });
+    const [domainData, setDomainData] = useState<any>(null);
     const [loading, setLoading] = useState(false);
-    const fetchWhois = async () => {
+    const fetchWhois = async (e) => {
+        e.preventDefault();
         setLoading(true);
-        const response = await fetch(`/api/whois`, {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                domain: domain,
-            }),
-        });
+        const response = await fetch(
+            `https://679f-152-58-5-252.ngrok-free.app/whois?domain=${domain}`,
+            {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    domain: domain,
+                }),
+            }
+        );
         const data = await response.json();
         setDomainData(data);
         setLoading(false);
