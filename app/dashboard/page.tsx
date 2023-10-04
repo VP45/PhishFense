@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Loading from "@/components/utils/loading";
 import { GoCheckCircleFill } from "react-icons/go";
 import { TiDelete } from "react-icons/ti";
 import CountUp from "react-countup";
@@ -97,7 +98,7 @@ export default function Dashboard() {
                         </form>
                     </div>
 
-                    {loader && <p>Loading...</p>}
+                    {loader && <Loading type="balls" color="#008080" />}
                 </div>
 
                 {phishingData && (
@@ -360,25 +361,6 @@ export default function Dashboard() {
                     </div>
                 )}
             </div>
-
-            {/* <div className="font-Poppins section">
-                {loading ? (
-                    <div className="text-center text-5xl">Loading...</div>
-                ) : (
-                    <>
-                        <div className="flex flex-col gap-2">
-                            {pages?.map((page) => {
-                                return <Row key={page?.id} {...page} />;
-                            })}
-                        </div>
-                        <PaginationButtons
-                            totalPages={totalPages}
-                            currentPage={currentPage}
-                            setCurrentPage={setCurrentPage}
-                        />
-                    </>
-                )}
-            </div> */}
         </section>
     );
 }

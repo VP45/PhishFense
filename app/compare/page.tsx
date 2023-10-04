@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Slider } from "@/components/slider";
 import CountUp from "react-countup";
+import Loading from "@/components/utils/loading";
 
 const ComparePage = () => {
     const [domain1, setDomain1] = useState("");
@@ -16,7 +17,7 @@ const ComparePage = () => {
 
     const [score, setScore] = useState(10);
 
-    const compareDomains = (e) => {
+    const compareDomains = (e: any) => {
         e.preventDefault();
         // make to api calls first api call returns two images that are two be displayed here, second api call returns a similarity score fo the two domains in each api call i have to pass the domain names as body parameter
 
@@ -157,7 +158,7 @@ const ComparePage = () => {
                         </button>
                     </form>
 
-                    {loading && <p>Loading...</p>}
+                    {loading && <Loading type="balls" color="#008080" />}
 
                     {image1 && image2 && score && (
                         <>

@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { TbWorldWww } from "react-icons/tb";
+import Loading from "@/components/utils/loading";
 import {
     BsFillPersonFill,
     BsPersonLinesFill,
@@ -139,7 +140,7 @@ export default function Whois() {
                         </button>
                     </form>
 
-                    {loading && <p>Loading...</p>}
+                    {loading && <Loading type="balls" color="#008080" />}
                 </div>
 
                 {/* if domainData is not null or {} */}
