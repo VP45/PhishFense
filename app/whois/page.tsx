@@ -1,8 +1,4 @@
 "use client";
-export const metadata = {
-    title: "Whois",
-    description: "Page description",
-};
 import React, { useState, useEffect } from "react";
 import { TbWorldWww } from "react-icons/tb";
 import {
