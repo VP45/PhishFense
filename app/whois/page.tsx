@@ -17,7 +17,15 @@ export default function Home() {
     const [loading, setLoading] = useState(false);
     const fetchWhois = async () => {
         setLoading(true);
-        const response = await fetch(`/api/whois/${domain}`);
+        const response = await fetch(`/api/whois`, {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                domain: domain,
+            }),
+        });
         const data = await response.json();
         setDomainData(data);
         setLoading(false);
@@ -43,7 +51,8 @@ export default function Home() {
                             type="text"
                             value={domain}
                             onChange={(e) => setDomain(e.target.value)}
-                            className="form-input w-full appearance-none bg-gray-300 border border-gray-400 focus:border-gray-600 rounded-sm px-4 py-3 mb-2 sm:mb-0 sm:mr-2 text-black placeholder-gray-500"
+                            className="form-input w-full appearance-none bg-gray-300 border border-gray-400 focus:border-gray-600 rounded-sm px-4 py-3 mb-2 sm:mb-0 sm:mr-2 text-black placeholder-gray-800"
+                            placeholder="www.doogle.com"
                         />
                         <button
                             className="btn text-white bg-blue-600 hover:bg-blue-700 shadow"
@@ -58,7 +67,7 @@ export default function Home() {
 
                 {/* if domainData is not null or {} */}
 
-                {domainData && domainData !== null && (
+                {domainData && (
                     <div className="max-w-6xl mx-auto px-4 sm:px-6">
                         <div className="relative flex flex-row justify-start items-center px-4 gap-6 bg-white rounded shadow-md">
                             <TbWorldWww className="w-14 h-14 p-2 bg-blue-600 rounded-full text-white " />
