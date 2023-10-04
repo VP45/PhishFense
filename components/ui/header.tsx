@@ -72,7 +72,39 @@ export default function Header() {
                             </ul>
                         </nav>
                     ) : (
-                        <UserButton afterSignOutUrl="/" />
+                        <nav className="hidden md:flex md:grow">
+                            {/* Desktop sign in links */}
+                            <ul className="flex grow uppercase justify-end flex-wrap items-center gap-5">
+                                <li>
+                                    <Link
+                                        href="/dashboard"
+                                        className="font-medium hover:text-sky-500 text-gray-600 flex items-center transition duration-150 ease-in-out"
+                                    >
+                                        Dashboard
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link
+                                        href="/compare"
+                                        className="font-medium hover:text-sky-500 text-gray-600 flex items-center transition duration-150 ease-in-out"
+                                    >
+                                        Compare
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link
+                                        href="/whois"
+                                        className="font-medium hover:text-sky-500 text-gray-600 flex items-center transition duration-150 ease-in-out"
+                                    >
+                                        Whois
+                                    </Link>
+                                </li>
+                                <li>
+                                    <UserButton afterSignOutUrl="/" />
+                                </li>
+                            </ul>
+                        </nav>
+                        
                     )}
 
                     <MobileMenu />
