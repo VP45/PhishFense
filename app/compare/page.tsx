@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { Slider } from "@/components/slider";
+import CountUp from "react-countup";
 
 const ComparePage = () => {
     const [domain1, setDomain1] = useState("");
@@ -155,7 +156,14 @@ const ComparePage = () => {
                                 </div>
                             </div>
                             <p className="text-2xl text-gray-600 pt-6">
-                                Similarity Score: {score}%
+                                Similarity Score:{" "}
+                                <CountUp
+                                    start={0}
+                                    end={score}
+                                    duration={2}
+                                    decimals={1}
+                                    suffix={"%"}
+                                />
                             </p>
                         </>
                     )}

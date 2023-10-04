@@ -3,13 +3,19 @@
 import React, { useState } from "react";
 import { GoCheckCircleFill } from "react-icons/go";
 import { TiDelete } from "react-icons/ti";
+import CountUp from "react-countup";
+import PaginationButtons from "@/components/pagination/buttons";
+import useDataFetcher from "@/components/pagination/useDataFetcher";
+import Row from "@/components/pagination/row";
 
 export default function Dashboard() {
     const [domain, setDomain] = useState("");
     const [phishingData, setPhishingData] = useState<any>({});
-    const [loading, setLoading] = useState(false);
+    const [loader, setLoader] = useState(false);
+    const { loading, pages, totalPages, currentPage, setCurrentPage } =
+        useDataFetcher();
     const fetchPhishing = async () => {
-        setLoading(true);
+        setLoader(true);
         const response = await fetch(`/api/whois`, {
             method: "post",
             headers: {
@@ -21,46 +27,74 @@ export default function Dashboard() {
         });
         const data = await response.json();
         setPhishingData(data);
-        setLoading(false);
+        setLoader(false);
     };
 
     return (
-        <>
-            <div className="max-w-6xl mx-auto px-4 sm:px-6">
-                <div
-                    className="pt-32 pb-12 md:pt-40 md:pb-20"
-                    data-aos="zoom-y-out"
+        <section className="relative">
+            <div
+                // left-1/2 transform -translate-x-1/2 bottom-0
+                className="absolute left-1/2 transform rotate-180 -translate-x-1/2 pointer-events-none -z-1"
+                aria-hidden="true"
+            >
+                <svg
+                    width="1360"
+                    height="578"
+                    viewBox="0 0 1360 578"
+                    xmlns="http://www.w3.org/2000/svg"
                 >
-                    <h1 className="text-5xl md:text-6xl font-extrabold leading-tighter tracking-tighter mb-4">
-                        <span className="bg-clip-text uppercase text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
+                    <defs>
+                        <linearGradient
+                            x1="50%"
+                            y1="0%"
+                            x2="50%"
+                            y2="100%"
+                            id="illustration-01"
+                        >
+                            <stop stopColor="#FFF" offset="0%" />
+                            <stop stopColor="#EAEAEA" offset="77.402%" />
+                            <stop stopColor="#DFDFDF" offset="100%" />
+                        </linearGradient>
+                    </defs>
+                    <g fill="url(#illustration-01)" fillRule="evenodd">
+                        <circle cx="1232" cy="128" r="128" />
+                        <circle cx="155" cy="443" r="64" />
+                    </g>
+                </svg>
+            </div>
+            <div className="max-w-6xl mx-auto px-4 sm:px-6">
+                <div className="pt-20 pb-12 md:pt-40 md:pb-20 flex flex-col justify-center items-center">
+                    <h1
+                        className="text-4xl md:text-5xl font-extrabold leading-tighter tracking-tighter mb-4 text-center"
+                        data-aos="zoom-y-out"
+                    >
+                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
                             Phishing Detection
                         </span>
                     </h1>
-                    {/* <div className="max-w-3xl mx-auto"> */}
-                    {/* <p className="text-gray-600 text-lg mb-6">
-                        Enter a domain name to check
-                    </p> */}
-                    <form className="w-full lg:w-auto flex justify-evenly items-center">
-                        <input
-                            type="text"
-                            value={domain}
-                            onChange={(e) => setDomain(e.target.value)}
-                            className="form-input w-full appearance-none bg-gray-300 border border-gray-400 focus:border-gray-600 rounded-sm px-4 py-3 mb-2 sm:mb-0 sm:mr-2 text-black placeholder-gray-800"
-                            placeholder="Enter a domain name to check..."
-                        />
-                        <button
-                            className="btn text-white bg-blue-600 hover:bg-blue-700 shadow"
-                            onClick={fetchPhishing}
-                        >
-                            Check
-                        </button>
-                    </form>
+                    <div className="max-w-6xl mx-auto">
+                        <form className="w-full flex justify-evenly items-center">
+                            <input
+                                type="text"
+                                value={domain}
+                                onChange={(e) => setDomain(e.target.value)}
+                                className="form-input w-full appearance-none bg-gray-300 border border-gray-400 focus:border-gray-600 rounded-sm px-4 py-3 mb-2 sm:mb-0 sm:mr-2 text-black placeholder-gray-800"
+                                placeholder="Enter a domain."
+                            />
+                            <button
+                                className="btn text-white bg-blue-600 hover:bg-blue-700 shadow"
+                                onClick={fetchPhishing}
+                            >
+                                Check
+                            </button>
+                        </form>
+                    </div>
 
-                    {loading && <p>Loading...</p>}
+                    {loader && <p>Loading...</p>}
                 </div>
 
                 {phishingData && (
-                    <div className="max-w-6xl mx-auto px-3">
+                    <div className="max-w-6xl mx-auto px-3 text-center flex flex-col justify-center items-center">
                         <h1 className="text-4xl font-bold text-gray-900">
                             Phishing Detection Information
                         </h1>
@@ -70,7 +104,13 @@ export default function Dashboard() {
                                 Domain Safety Score:
                             </h1>
                             <span className="bg-gray-200 border-4 border-blue-400 p-8 text-3xl font-bold rounded-full">
-                                {phishingData.SCORE || 180}
+                                <CountUp
+                                    start={0}
+                                    end={phishingData.SCORE || 180}
+                                    duration={2}
+                                    decimals={0}
+                                    suffix={""}
+                                />
                             </span>
                             <p>
                                 Lorem ipsum dolor sit amet consectetur
@@ -284,14 +324,43 @@ export default function Dashboard() {
                                 {phishingData?.target_urls?.map((u: string) => {
                                     return <p>{u}</p>;
                                 })}
-                                {/* <p className="ml-auto">
-                                    {phishingData.target_urls ? <GoCheckCircleFill className="text-green-500" size={24} /> : <GoCheckCircleFill className="text-green-500" size={24} />}
-                                </p> */}
+                                <p className="ml-auto">
+                                    {phishingData.target_urls ? (
+                                        <GoCheckCircleFill
+                                            className="text-green-500"
+                                            size={24}
+                                        />
+                                    ) : (
+                                        <GoCheckCircleFill
+                                            className="text-green-500"
+                                            size={24}
+                                        />
+                                    )}
+                                </p>
                             </div>
                         </div>
                     </div>
                 )}
             </div>
-        </>
+
+            {/* <div className="font-Poppins section">
+                {loading ? (
+                    <div className="text-center text-5xl">Loading...</div>
+                ) : (
+                    <>
+                        <div className="flex flex-col gap-2">
+                            {pages?.map((page) => {
+                                return <Row key={page?.id} {...page} />;
+                            })}
+                        </div>
+                        <PaginationButtons
+                            totalPages={totalPages}
+                            currentPage={currentPage}
+                            setCurrentPage={setCurrentPage}
+                        />
+                    </>
+                )}
+            </div> */}
+        </section>
     );
 }
