@@ -10,7 +10,7 @@ export default function Dashboard() {
     const [loading, setLoading] = useState(false);
     const fetchPhishing = async () => {
         setLoading(true);
-        const response = await fetch(`/api/whois`, {
+        const response = await fetch(`/api/dashboard`, {
             method: "post",
             headers: {
                 "Content-Type": "application/json",
