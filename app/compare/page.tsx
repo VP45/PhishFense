@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { Slider } from "@/components/slider";
 
 const ComparePage = () => {
     const [domain1, setDomain1] = useState("");
@@ -7,10 +8,10 @@ const ComparePage = () => {
 
     const [loading, setLoading] = useState(false);
 
-    const [image1, setImage1] = useState(null);
-    const [image2, setImage2] = useState(null);
+    const [image1, setImage1] = useState("https://picsum.photos/200/300");
+    const [image2, setImage2] = useState("https://picsum.photos/200/300");
 
-    const [score, setScore] = useState(0);
+    const [score, setScore] = useState(10);
 
     const compareDomains = () => {
         // make to api calls first api call returns two images that are two be displayed here, second api call returns a similarity score fo the two domains in each api call i have to pass the domain names as body parameter
@@ -109,24 +110,24 @@ const ComparePage = () => {
 
                     {loading && <p>Loading...</p>}
 
-                    {image1 && image2 && (
-                        <div className="flex flex-col justify-center items-center gap-4">
-                            <div className="flex flex-col justify-center items-center gap-4">
-                                <img
-                                    src={`data:image/png;base64,${image1}`}
-                                    alt="domain1"
-                                    className="w-1/2"
-                                />
-                                <img
-                                    src={`data:image/png;base64,${image2}`}
-                                    alt="domain2"
-                                    className="w-1/2"
-                                />
+                    {image1 && image2 && score && (
+                        <>
+                            <div className="flex flex-col justify-center items-center gap-4 pt-12">
+                                <div className="flex flex-row justify-center items-center gap-4">
+                                    {/* <img
+                                        // src={`data:image/png;base64,${image1}`}
+                                        src={image1}
+                                        alt="domain1"
+                                        className="w-1/2"
+                                    /> */}
+                                    <Slider image={image1} ogImage={image2} />
+                                    <Slider image={image1} ogImage={image2} />
+                                </div>
                             </div>
-                            <p className="text-2xl text-gray-600">
+                            <p className="text-2xl text-gray-600 pt-6">
                                 Similarity Score: {score}%
                             </p>
-                        </div>
+                        </>
                     )}
                 </div>
             </div>
