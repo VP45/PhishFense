@@ -5,6 +5,8 @@ import { UserButton, useAuth } from "@clerk/nextjs";
 
 import Link from "next/link";
 import Logo from "./logo";
+import Image from "next/image";
+import Logoo from "@/public/images/PhishFense.png";
 import Dropdown from "@/components/utils/dropdown";
 import MobileMenu from "./mobile-menu";
 
@@ -34,7 +36,13 @@ export default function Header() {
                 <div className="flex items-center justify-between h-16 md:h-20">
                     {/* Site branding */}
                     <div className="shrink-0 mr-4">
-                        <Logo />
+                        {/* <Logo /> */}
+                        <Image
+                            src={Logoo}
+                            alt="PhishFense"
+                            width={60}
+                            height={60}
+                        />
                     </div>
 
                     {/* Desktop navigation */}

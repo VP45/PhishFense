@@ -57,11 +57,11 @@ export default function Whois() {
     // });
     const [domainData, setDomainData] = useState<any>(null);
     const [loading, setLoading] = useState(false);
-    const fetchWhois = async (e) => {
+    const fetchWhois = async (e: any) => {
         e.preventDefault();
         setLoading(true);
         const response = await fetch(
-            `https://0b98-103-246-224-137.ngrok-free.app/whois?domain=${domain}`,
+            `https://4c4a-103-246-224-137.ngrok-free.app/whois?domain=${domain}`,
             {
                 method: "post",
                 headers: {

@@ -15,11 +15,11 @@ export default function Dashboard() {
     const [loader, setLoader] = useState(false);
     const { loading, pages, totalPages, currentPage, setCurrentPage } =
         useDataFetcher();
-    const fetchPhishing = async (e) => {
+    const fetchPhishing = async (e: any) => {
         e.preventDefault();
         setLoader(true);
         const response = await fetch(
-            `https://0b98-103-246-224-137.ngrok-free.app/predict`,
+            `https://4c4a-103-246-224-137.ngrok-free.app/predict`,
             {
                 method: "post",
                 headers: {
