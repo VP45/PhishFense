@@ -19,7 +19,7 @@ export default function Dashboard() {
         e.preventDefault();
         setLoader(true);
         const response = await fetch(
-            `https://890d-103-246-224-137.ngrok-free.app/predict`,
+            `https://0b98-103-246-224-137.ngrok-free.app/predict`,
             {
                 method: "post",
                 headers: {
