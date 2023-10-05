@@ -339,7 +339,7 @@ export default function Dashboard() {
                                         return <p>{u}</p>;
                                     }
                                 )}
-                                <p className="ml-auto">
+                                {/* <p className="ml-auto">
                                     {phishingData?.prediction?.target_urls ? (
                                         <GoCheckCircleFill
                                             className="text-green-500"
@@ -351,7 +351,7 @@ export default function Dashboard() {
                                             size={24}
                                         />
                                     )}
-                                </p>
+                                </p> */}
                             </div>
                         </div>
                     </div>
