@@ -120,10 +120,6 @@ export default function Dashboard() {
                                     suffix={""}
                                 />
                             </span>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Ex, deserunt error.
-                            </p>
                         </div>
 
                         <div className="grid grid-cols-2 gap-x-14 gap-1 mx-12 bg-sky-50 p-10 rounded-xl my-10">
