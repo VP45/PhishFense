@@ -1,4 +1,4 @@
-import VideoThumb from '@/public/images/hero-image.png'
+import VideoThumb from '@/public/images/trial_bg_final.png'
 import ModalVideo from '@/components/modal-video'
 // import Image from 'next/image'
 import Link from 'next/link'
@@ -40,7 +40,7 @@ export default function Hero() {
               <div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center" data-aos="zoom-y-out" data-aos-delay="300">
                 <div>
                   <Link href='/signin' className="btn text-white bg-blue-600 hover:bg-blue-700 w-full mb-4 sm:w-auto sm:mb-0">
-                    Get Start
+                    Get Started
                   </Link>
                 </div>
                 {/* <div>
