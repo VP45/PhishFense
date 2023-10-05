@@ -35,8 +35,8 @@ class ActionProvider {
 
         // console.log(data);
 
-        const text = await response.text(); // Read the response as text
-        const data = JSON.parse(text);
+        const text = await response.json(); // Read the response as text
+        const data = JSON.parse(response.body);
 
         if (data.message && Array.isArray(data.message)) {
             data.message.forEach((messageData) => {
