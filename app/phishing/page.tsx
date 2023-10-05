@@ -123,7 +123,7 @@ export default function Dashboard() {
                             alert: "alert",
                             popup: "alert",
                         }}
-                        msg="You can write anything here. Example - phishing."
+                        msg="You can write anything here. Example - python hnrd.py -f 2023-10-03 -r .*paypal*."
                     />
                 </div>
                 <div className="max-w-4xl flex flex-col justify-center items-center mt-20 mx-auto text-justify px-4">
