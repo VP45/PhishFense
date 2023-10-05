@@ -15,37 +15,23 @@ class ActionProvider {
     }
 
     ResponseHandler = async (message) => {
-        const response = await fetch("/api/chat", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                message,
-            }),
-        });
+        const prompt = `Generate a list of 5 website links that replace the domain of this example link with similar domains. Example input: ${message}`;
+        const response = await fetch(
+            "https://4c4a-103-246-224-137.ngrok-free.app/generate?propmt=" +
+                prompt,
+            {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+        );
         console.log(response);
-        if (!response.ok) {
-            throw new Error(response.statusText);
-        }
-        // const data = response.body;
-        // if (!data) {
-        //     return;
-        // }
-
-        // console.log(data);
-
-        const text = await response.json(); // Read the response as text
-        const data = JSON.parse(response.body);
-
-        if (data.message && Array.isArray(data.message)) {
-            data.message.forEach((messageData) => {
-                const message = this.createChatBotMessage(messageData);
-                this.setChatbotMessage(message);
-            });
-        } else {
-            console.error("Invalid data structure in API response");
-        }
+        const data = await response.json();
+        console.log(data);
+        const messageData = this.createChatBotMessage(data);
+        console.log(messageData);
+        this.setChatbotMessage(messageData);
 
         // const reader = data.getReader();
         // const decoder = new TextDecoder();
