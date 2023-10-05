@@ -24,7 +24,7 @@ const ComparePage = () => {
         // api call 1
         setLoading(true);
         fetch(
-            `https://8550-103-246-224-137.ngrok-free.app/post_images?url1=${encodeURIComponent(
+            `https://890d-103-246-224-137.ngrok-free.app/post_images?url1=${encodeURIComponent(
                 domain1
             )}&url2=${encodeURIComponent(domain2)}`,
             // "https://8550-103-246-224-137.ngrok-free.app/post_images?url1=https%3A%2F%2Fgithub.com%2FMokshitSurana&url2=https%3A%2F%2Fgithub.com%2FArchit1706",

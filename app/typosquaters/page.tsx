@@ -15,7 +15,7 @@ export default function Dashboard() {
         e.preventDefault();
         setLoading(true);
         const res = await fetch(
-            "https://8550-103-246-224-137.ngrok-free.app/get_typesquatted_urls",
+            "https://890d-103-246-224-137.ngrok-free.app/get_typesquatted_urls",
             {
                 method: "POST",
                 headers: {

@@ -61,7 +61,7 @@ export default function Whois() {
         e.preventDefault();
         setLoading(true);
         const response = await fetch(
-            `https://679f-152-58-5-252.ngrok-free.app/whois?domain=${domain}`,
+            `https://890d-103-246-224-137.ngrok-free.app/whois?domain=${domain}`,
             {
                 method: "post",
                 headers: {
@@ -320,6 +320,7 @@ export default function Whois() {
                             </div>
                             <ul>
                                 {domainData.domain_name &&
+                                    Array.isArray(domainData.domain_name) &&
                                     domainData.domain_name.map(
                                         (name: string, index: number) => (
                                             <li className="" key={index}>
@@ -354,6 +355,7 @@ export default function Whois() {
                                         )
                                     )}
                                 {domainData.updated_date &&
+                                    Array.isArray(domainData.updated_date) &&
                                     domainData.updated_date.map(
                                         (date: any, index: number) => (
                                             <li key={index}>
