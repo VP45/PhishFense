@@ -112,7 +112,8 @@ export default function Dashboard() {
                                     "https://www.google.com/",
                                     "_blank"
                                 ),
-                            phishing: showRaw,
+                            phishing: showRaw, 
+                            "phishing paypal" : showRaw,
                             'python hnrd.py -f 2023-10-03 -r .*paypal*.': showRaw,
                             showmsg: showMsg,
                             popup: () => alert("Terminal in React"),
@@ -123,7 +124,7 @@ export default function Dashboard() {
                             alert: "alert",
                             popup: "alert",
                         }}
-                        msg="You can write anything here. Example - python hnrd.py -f 2023-10-03 -r .*paypal*."
+                        msg="You can write anything here. Example - phishing domain_name"
                     />
                 </div>
                 <div className="max-w-4xl flex flex-col justify-center items-center mt-20 mx-auto text-justify px-4">
