@@ -337,7 +337,7 @@ export default function Dashboard() {
                                 {phishingData?.prediction?.target_urls?.map(
                                     (u: string) => {
                                         return (
-                                            <p className="bg-blue-500 text-white rounded-full mx-1">
+                                            <p className="bg-blue-500 p-1 text-white rounded-full mx-1">
                                                 {u}
                                             </p>
                                         );
