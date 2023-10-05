@@ -31,7 +31,7 @@ export default function Dashboard() {
         e.preventDefault();
         setLoader(true);
         const response = await fetch(
-            `https://0cac-103-246-224-137.ngrok-free.app/predict`,
+            `https://5eea-103-246-224-137.ngrok-free.app/predict`,
             {
                 method: "post",
                 headers: {
@@ -113,6 +113,7 @@ export default function Dashboard() {
                                     "_blank"
                                 ),
                             phishing: showRaw,
+                            'python hnrd.py -f 2023-10-03 -r .*paypal*.': showRaw,
                             showmsg: showMsg,
                             popup: () => alert("Terminal in React"),
                         }}
