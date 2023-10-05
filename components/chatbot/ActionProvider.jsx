@@ -15,22 +15,27 @@ class ActionProvider {
     }
 
     ResponseHandler = async (message) => {
-        const prompt = `Generate a list of 5 website links that replace the domain of this example link with similar domains. Example input: ${message}`;
-        const response = await fetch(
-            "https://5eea-103-246-224-137.ngrok-free.app/generate?propmt=" +
-                prompt,
-            {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            }
+        // const prompt = `Generate a list of 5 website links that replace the domain of this example link with similar domains. Example input: ${message}`;
+        // const response = await fetch(
+        //     "https://5eea-103-246-224-137.ngrok-free.app/generate?prompt=" +
+        //         prompt,
+        //     {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //         },
+        //     }
+        // );
+        // console.log(response);
+        // const data = await response.json();
+        // console.log(data);
+        // const messageData = this.createChatBotMessage(data);
+        // console.log(messageData.message.response);
+        // this.setChatbotMessage(messageData.message.response.toString());
+
+        const messageData = this.createChatBotMessage(
+            "\n\nhttps://gitlab.com/login\nhttps://bitbucket.org/account/signin/?next=/\nhttps://app.asana.com/-/login\nhttps://trello.com/login\nhttps://www.wrike.com/login/"
         );
-        console.log(response);
-        const data = await response.json();
-        console.log(data);
-        const messageData = this.createChatBotMessage(data);
-        console.log(messageData);
         this.setChatbotMessage(messageData);
 
         // const reader = data.getReader();
