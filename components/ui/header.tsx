@@ -108,6 +108,14 @@ export default function Header() {
                                     </Link>
                                 </li>
                                 <li>
+                                    <Link
+                                        href="/phishing"
+                                        className="font-medium hover:text-sky-500 text-gray-600 flex items-center transition duration-150 ease-in-out"
+                                    >
+                                        Phishing
+                                    </Link>
+                                </li>
+                                <li>
                                     <UserButton afterSignOutUrl="/" />
                                 </li>
                             </ul>
