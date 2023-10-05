@@ -9,6 +9,7 @@ import PaginationButtons from "@/components/pagination/buttons";
 import useDataFetcher from "@/components/pagination/useDataFetcher";
 import Row from "@/components/pagination/row";
 import Terminal from "terminal-in-react";
+import TypewriterText from "@/components/type-effect";
 
 export default function Dashboard() {
     const [domain, setDomain] = useState("");
@@ -21,6 +22,8 @@ export default function Dashboard() {
     }
 
     function showRaw() {
+        // delay for 2sec
+
         return data;
     }
 
@@ -79,70 +82,91 @@ export default function Dashboard() {
                     </g>
                 </svg>
             </div>
-            <div className="max-w-6xl mx-auto px-4 sm:px-6">
-                <div className="pt-20 pb-12 md:pt-40 md:pb-20 flex flex-col justify-center items-center">
+
+            <div className="grid grid-cols-2 w-full justify-center items-center min-h-screen">
+                <div
+                    className="h-full w-full flex flex-col justify-center items-center mt-20 mx-auto text-justify "
+                    style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        height: "100vh",
+                    }}
+                >
                     <h1
-                        className="text-4xl md:text-5xl font-extrabold leading-tighter tracking-tighter mb-4 text-center"
+                        className="text-3xl font-bold leading-tighter tracking-tighter mb-4 text-center"
                         data-aos="zoom-y-out"
                     >
                         <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
-                            Phishing Detection
+                            Terminal
                         </span>
                     </h1>
-                    <div className="max-w-6xl mx-auto">
-                        <form className="w-full flex justify-evenly items-center">
-                            <input
-                                type="text"
-                                value={domain}
-                                onChange={(e) => setDomain(e.target.value)}
-                                className="form-input w-full appearance-none bg-gray-300 border border-gray-400 focus:border-gray-600 rounded-sm px-4 py-3 mb-2 sm:mb-0 sm:mr-2 text-black placeholder-gray-800"
-                                placeholder="Enter a domain."
-                            />
-                            <button
-                                className="btn text-white bg-blue-600 hover:bg-blue-700 shadow"
-                                onClick={fetchPhishing}
-                            >
-                                Check
-                            </button>
-                        </form>
-                    </div>
-
-                    {loader && <Loading type="balls" color="#008080" />}
+                    <Terminal
+                        color="#8feb34"
+                        backgroundColor="black"
+                        barColor="black"
+                        style={{ fontWeight: "bold", fontSize: "1em" }}
+                        commands={{
+                            "open-google": () =>
+                                window.open(
+                                    "https://www.google.com/",
+                                    "_blank"
+                                ),
+                            phishing: showRaw,
+                            showmsg: showMsg,
+                            popup: () => alert("Terminal in React"),
+                        }}
+                        descriptions={{
+                            "open-google": "opens google.com",
+                            showmsg: "shows a message",
+                            alert: "alert",
+                            popup: "alert",
+                        }}
+                        msg="You can write anything here. Example - phishing."
+                    />
                 </div>
-            </div>
-
-            <div
-                style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: "100vh",
-                }}
-            >
-                <Terminal
-                    color="blue"
-                    backgroundColor="black"
-                    barColor="black"
-                    style={{ fontWeight: "bold", fontSize: "1em" }}
-                    commands={{
-                        "open-google": () =>
-                            window.open("https://www.google.com/", "_blank"),
-                        phishing: showRaw,
-                        showmsg: showMsg,
-                        popup: () => alert("Terminal in React"),
-                    }}
-                    descriptions={{
-                        "open-google": "opens google.com",
-                        showmsg: "shows a message",
-                        alert: "alert",
-                        popup: "alert",
-                    }}
-                    msg="You can write anything here. Example - Hello! My name is Foo and I like Bar."
-                />
+                <div className="max-w-4xl flex flex-col justify-center items-center mt-20 mx-auto text-justify px-4">
+                    <h1
+                        className="text-3xl font-bold leading-tighter tracking-tighter mb-4 text-center"
+                        data-aos="zoom-y-out"
+                    >
+                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
+                            Explanation
+                        </span>
+                    </h1>
+                    <br />
+                    <TypewriterText text={explanation} />
+                </div>
             </div>
         </section>
     );
 }
+
+const explanation = `
+Retrieving DNS Record(s) Information\n\n
+paypalfankuan.com: A record points to IP address 172.65.237.18.\t
+paypalsecure.online: No specific DNS records mentioned.\t
+paypal2.com: MX record points to mail.paypal2.com, and it has NS records for DNS servers.\n\n
+Retrieving IP2ASN Information\n\t
+172.65.237.18: Belongs to ASN 13335 (CLOUDFLARENET, US) registered with ARIN.\n\n
+Retrieving WHOIS Information\n\t
+paypalfankuan.com: Registered via DropCatch.com 1290 LLC, with privacy protection.\n
+paypalsecure.online: Registered via GoDaddy.com, LLC, with privacy protection.\n
+paypal2.com: Registered via NameSilo, LLC, with privacy protection.\n\n
+Retrieving Reverse WHOIS Information\n\n
+Information about domain owners (redacted for privacy) with no specific details provided.\n\n
+Retrieving Certificates\n\n
+Certificate details for paypalsecure.online and paypalfankuan.com, including issuer information, common names, and validity period.\n\t
+Retrieving VirusTotal Information\n\n
+No specific information provided, but it seems that there might be an issue retrieving data from\n\n VirusTotal for the mentioned domains.\n\n
+Check domains against QUAD9 service\n\n
+Indications of whether the domains are blocked (or not) by the QUAD9 service.\n
+paypal2.com and paypalsecure.online are blocked, whereas paypalfankuan.com is not blocked.\n\n
+Calculate Shannon Entropy Information\n\n
+Shannon entropy values calculated for each domain. Shannon entropy is a measure of the randomness or disorder within a set of data. Higher entropy values suggest more randomness.\n\n
+Calculate Levenshtein Ratio\n\n
+Levenshtein ratio calculated for each domain name compared to "paypal." \n
+Levenshtein ratio measures the similarity between two strings. Higher values indicate greater similarity.`;
 
 const data = `
 [*]-Retrieving DNS Record(s) Information

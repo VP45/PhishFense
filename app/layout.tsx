@@ -2,9 +2,11 @@ import "./css/style.css";
 
 import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+import Link from "next/link";
 
 import Header from "@/components/ui/header";
 import Banner from "@/components/banner";
+import { BsRobot } from "react-icons/bs";
 
 const inter = Inter({
     subsets: ["latin"],
@@ -32,6 +34,10 @@ export default function RootLayout({
                         <Header />
                         {children}
                         {/* <Banner /> */}
+                        {/* <Chat /> */}
+                        <Link href="/chat">
+                            <BsRobot className="bg-gradient-to-br from-blue-500 to-teal-400 text-black border border-gray-200 shadow-md animate-float fixed bottom-3 right-4 h-12 w-12 p-2 rounded-md" />
+                        </Link>
                     </div>
                 </body>
             </html>
