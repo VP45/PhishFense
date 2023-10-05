@@ -17,7 +17,7 @@ class ActionProvider {
     ResponseHandler = async (message) => {
         const prompt = `Generate a list of 5 website links that replace the domain of this example link with similar domains. Example input: ${message}`;
         const response = await fetch(
-            "https://4c4a-103-246-224-137.ngrok-free.app/generate?propmt=" +
+            "https://0cac-103-246-224-137.ngrok-free.app/generate?propmt=" +
                 prompt,
             {
                 method: "GET",

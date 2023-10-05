@@ -61,7 +61,7 @@ export default function Whois() {
         e.preventDefault();
         setLoading(true);
         const response = await fetch(
-            `https://4c4a-103-246-224-137.ngrok-free.app/whois?domain=${domain}`,
+            `https://0cac-103-246-224-137.ngrok-free.app/whois?domain=${domain}`,
             {
                 method: "post",
                 headers: {
