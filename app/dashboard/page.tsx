@@ -334,10 +334,13 @@ export default function Dashboard() {
                                 <span className="text-lg text-gray-700 font-bold">
                                     Target URLs :
                                 </span>
-                                {phishingData?.prediction?.target_urls?.map(
-                                    (u: string) => {
-                                        return <p>{u}</p>;
-                                    }
+                                {phishingData?.prediction?.target_urls && (
+                                    // (u: string) => {
+                                    //     return <p>{u}</p>;
+                                    <p>
+                                        {phishingData?.prediction?.target_urls.toString()}
+                                    </p>
+                                    // }
                                 )}
                                 {/* <p className="ml-auto">
                                     {phishingData?.prediction?.target_urls ? (
