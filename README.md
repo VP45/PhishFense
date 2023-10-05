@@ -72,18 +72,11 @@ In the era of widespread phishing attacks, the need for a robust solution to ide
 3. Explore the tool's features, including WHOIS data, image comparison, typosquatting checks, and more.
 4. Engage with the chatbot for assistance and information.
 
-## Contributing
-
-Contributions to this project are welcome. Please follow our [Contribution Guidelines](CONTRIBUTING.md) for details on how to contribute.
-
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache 2.0 License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
 We would like to thank the open-source community for their contributions to the libraries and tools used in this project.
 
----
-
-Feel free to customize this README to include any additional information specific to your project's setup and requirements.
