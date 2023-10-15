@@ -19,7 +19,7 @@ export default function Dashboard() {
         e.preventDefault();
         setLoader(true);
         const response = await fetch(
-            `https://5eea-103-246-224-137.ngrok-free.app/predict`,
+            `https://deploy-hoga-pls.gigamoksh.repl.co/predict`,
             {
                 method: "post",
                 headers: {

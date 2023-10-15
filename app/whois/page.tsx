@@ -61,7 +61,7 @@ export default function Whois() {
         e.preventDefault();
         setLoading(true);
         const response = await fetch(
-            `https://5eea-103-246-224-137.ngrok-free.app/whois?domain=${domain}`,
+            `https://deploy-hoga-pls.gigamoksh.repl.co/whois?domain=${domain}`,
             {
                 method: "post",
                 headers: {

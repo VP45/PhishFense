@@ -9,12 +9,24 @@ import PaginationButtons from "@/components/pagination/buttons";
 import useDataFetcher from "@/components/pagination/useDataFetcher";
 import Row from "@/components/pagination/row";
 import Terminal from "terminal-in-react";
+import { ReactTerminal } from "react-terminal";
+
 import TypewriterText from "@/components/type-effect";
 
 export default function Dashboard() {
     const [domain, setDomain] = useState("");
     const [phishingData, setPhishingData] = useState<any>({});
     const [loader, setLoader] = useState(false);
+
+    const commands = {
+        whoami: "jackharper",
+        cd: (directory: string) => `changed path to ${directory}`,
+        phishing: (name: string) => {
+            setDomain(name);
+            // fetchPhishing(name);
+            return data;
+        },
+    };
 
     // showMsg = () => "Hello World";
     function showMsg() {
@@ -31,7 +43,7 @@ export default function Dashboard() {
         e.preventDefault();
         setLoader(true);
         const response = await fetch(
-            `https://5eea-103-246-224-137.ngrok-free.app/predict`,
+            `https://deploy-hoga-pls.gigamoksh.repl.co/predict`,
             {
                 method: "post",
                 headers: {
@@ -101,7 +113,7 @@ export default function Dashboard() {
                             Terminal
                         </span>
                     </h1>
-                    <Terminal
+                    {/* <Terminal
                         color="#8feb34"
                         backgroundColor="black"
                         barColor="black"
@@ -125,7 +137,25 @@ export default function Dashboard() {
                             popup: "alert",
                         }}
                         msg="You can write anything here. Example - phishing domain_name"
-                    />
+                    /> */}
+
+                    <div className="w-full h-full px-4">
+                        <ReactTerminal
+                            commands={commands}
+                            themes={{
+                                "my-custom-theme": {
+                                    themeBGColor: "#272B36",
+                                    themeToolbarColor: "#DBDBDB",
+                                    themeColor: "#FFFEFC",
+                                    themePromptColor: "#a917a8",
+                                },
+                            }}
+                            theme="my-custom-theme"
+                            wellcomeMessage="Welcome to the phishing terminal write a commands phishing domain_name"
+                            prompt="phishfence@terminal:~$"
+                            errorMessage="Invalid Command: Try - phishing domain_name"
+                        />
+                    </div>
                 </div>
                 <div className="max-w-4xl flex flex-col justify-center items-center mt-20 mx-auto text-justify px-4">
                     <h1
@@ -171,9 +201,9 @@ Levenshtein ratio calculated for each domain name compared to "paypal." \n
 Levenshtein ratio measures the similarity between two strings. Higher values indicate greater similarity.`;
 
 const data = `
-[*]-Retrieving DNS Record(s) Information
-  \_ vnpaypal.online
-    \_ A 162.55.110.21
+[*]-Retrieving DNS Record(s) Information\n
+  \_ vnpaypal.online\n
+    \_ A 162.55.110.21\n
     \_ MX vnpaypal.online
     \_ NS ns1.apexhosting.in,ns2.apexhosting.in
     \_ SOA ns1.apexhosting.in

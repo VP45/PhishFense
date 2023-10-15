@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-
+import { TerminalContextProvider } from "react-terminal";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -22,10 +22,10 @@ export default function DashboardLayout({
     });
 
     return (
-        <>
+        <TerminalContextProvider>
             <main className="grow">{children}</main>
 
             <Footer />
-        </>
+        </TerminalContextProvider>
     );
 }
