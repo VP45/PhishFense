@@ -1,5 +1,3 @@
-Certainly, here's an extensive README for your AI/ML-Powered Phishing Domain Detection project, detailing the technologies used and key features:
-
 # AI/ML-Powered Phishing Domain Detection
 
 In the era of widespread phishing attacks, the need for a robust solution to identify malicious domains from newly registered websites is paramount. This project aims to develop an automated tool that leverages AI and ML, using open-source databases like WHOIS, to differentiate phishing domains from genuine ones. The tool employs backend code and content analysis, as well as web page image comparison to assign probability scores for phishing resemblance. The evaluation focuses on the tool's accuracy in identifying phishing domains' proximity to genuine ones, its ability to swiftly detect new threats, and its user-friendly interface for various output formats.
